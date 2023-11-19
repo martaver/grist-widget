@@ -9,12 +9,15 @@
     <pre id="readout">Waiting for data...</pre>
     <script>
       grist.ready();
-      const Account = await grist.getTable('Accounts')
-      const Transaction = await grist.getTable('Transactions')
-      const Account_Entry = await grist.getTable('Account_Entry')
-      grist.onNewRecord(async txn => {
-        Account_Entry.create({})
-      })
+      async function main() {
+        const Account = await grist.getTable('Accounts')
+        const Transaction = await grist.getTable('Transactions')
+        const Account_Entry = await grist.getTable('Account_Entry')
+        grist.onNewRecord(async txn => {
+          Account_Entry.create({})
+        })
+      }
+      main()
 //       async function example(cmd) {
 //   const Account = await grist.getTable('Accounts')
 //   const Transaction = await grist.getTable('Transactions')
