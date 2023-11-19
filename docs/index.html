@@ -2,15 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Grist Inspect</title>
+    <title>onRecord</title>
+    <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
   </head>
   <body>
-    <ul>
-      <li><a href="onRecord.html">onRecord</a></li>
-      <li><a href="onRecords.html">onRecords</a></li>
-      <li><a href="onOptions.html">onOptions</a></li>
-      <li><a href="api.html">exercise API</a></li>
-      <li><a href="columns.html">columns</a></li>
-    </ul>
+    <pre id="readout">Waiting for data...</pre>
+    <script>
+      grist.ready();
+      const Account = await grist.getTable('Accounts')
+      const Transaction = await grist.getTable('Transactions')
+      const Account_Entry = await grist.getTable('Account_Entry')
+      grist.onNewRecord(async txn => {
+        Account_Entry.create({})
+      })
+//       async function example(cmd) {
+//   const Account = await grist.getTable('Accounts')
+//   const Transaction = await grist.getTable('Transactions')
+//   const Account_Entry = await grist.getTable('Account_Entry')
+//   async function doStuff(txn) {
+//     const transaction = await grist.fetchSelectedRecord(txn.id, { keepEncoded: false })
+//     cmd.output('New Record')
+//     try {
+//       const result = await Account_Entry.create({ Account: transaction.From })
+//     }
+//     catch (e)
+//     {
+//       cmd.output(e)
+//     }
+//     cmd.output(transaction)
+//   }
+//   grist.onNewRecord(async txn => {
+    
+//     doStuff(txn)
+//   })
+
+//   grist.onRecord(async (txn) => {
+//     const transaction = await grist.fetchSelectedRecord(txn.id, { keepEncoded: false })
+//     cmd.output('New')
+//   });
+//   return "Added. Now change a cursor position in a table and observe the result.";
+// }
+    </script>
   </body>
 </html>
